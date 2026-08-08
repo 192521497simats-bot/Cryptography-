@@ -1,0 +1,13 @@
+key = "CIPHERABDFGJKLMNOQSTUVWXYZ"
+text = input("Enter text: ")
+
+enc = ""
+for ch in text:
+    enc += key[ord(ch.upper())-65] if ch.isalpha() else ch
+
+dec = ""
+for ch in enc:
+    dec += chr(key.index(ch.upper())+65) if ch.isalpha() else ch
+
+print("Cipher:", enc)
+print("Plain :", dec)
