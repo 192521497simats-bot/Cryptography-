@@ -1,0 +1,22 @@
+from collections import Counter
+
+text = input("Enter ciphertext: ").upper()
+
+english = "ETAOINSHRDLCUMWFGYPBVKJXQZ"
+count = Counter(c for c in text if c.isalpha())
+
+letters = [x for x,_ in count.most_common()]
+
+mapping = {}
+
+for i,x in enumerate(letters):
+    if i < 26:
+        mapping[x] = english[i]
+
+plain = ""
+
+for c in text:
+    plain += mapping.get(c,c)
+
+print("Possible plaintext:")
+print(plain)
