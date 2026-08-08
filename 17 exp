@@ -1,0 +1,7 @@
+keys = [f"K{i}" for i in range(1,17)]
+
+print("Encryption order:")
+print(keys)
+
+print("\nDecryption order:")
+print(keys[::-1])
