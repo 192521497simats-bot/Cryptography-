@@ -1,0 +1,19 @@
+from Crypto.Cipher import DES3
+from Crypto.Random import get_random_bytes
+
+key = DES3.adjust_key_parity(get_random_bytes(24))
+iv = get_random_bytes(8)
+
+text = b"HELLO CBC MODE!"
+text += b" " * (-len(text) % 8)
+
+cipher = DES3.new(key, DES3.MODE_CBC, iv)
+c = cipher.encrypt(text)
+
+print("Ciphertext:", c.hex())
+
+# Security: 3DES
+print("Security: 3DES")
+
+# Performance comparison
+print("Performance: 3DES is slower than DES")
