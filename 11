@@ -1,0 +1,11 @@
+import math
+
+keys = math.factorial(25)
+
+print("Number of keys =", keys)
+print("Approximate power of 2 =", math.log2(keys))
+
+# Common effective-key estimate
+effective = keys / math.factorial(2)**25
+print("Approximate effective keys =", effective)
+print("Power of 2 =", math.log2(effective))
