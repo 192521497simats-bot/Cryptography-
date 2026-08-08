@@ -1,0 +1,44 @@
+m = [
+    "MFHIK",
+    "UNOPQ",
+    "ZVWXY",
+    "ELARG",
+    "DSTBC"
+]
+
+text = "MUST SEE YOU OVER CADOGAN WEST COMING AT ONCE"
+text = ''.join(c for c in text.upper() if c.isalpha()).replace("J","I")
+
+pairs = []
+i = 0
+
+while i < len(text):
+    a = text[i]
+    b = text[i+1] if i+1 < len(text) else "X"
+
+    if a == b:
+        pairs.append(a+"X")
+        i += 1
+    else:
+        pairs.append(a+b)
+        i += 2
+
+def pos(c):
+    for r in range(5):
+        if c in m[r]:
+            return r, m[r].index(c)
+
+out = ""
+
+for a,b in pairs:
+    r1,c1 = pos(a)
+    r2,c2 = pos(b)
+
+    if r1 == r2:
+        out += m[r1][(c1+1)%5] + m[r2][(c2+1)%5]
+    elif c1 == c2:
+        out += m[(r1+1)%5][c1] + m[(r2+1)%5][c2]
+    else:
+        out += m[r1][c2] + m[r2][c1]
+
+print("Ciphertext:", out)
