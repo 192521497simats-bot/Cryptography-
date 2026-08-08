@@ -1,0 +1,9 @@
+p = "SENDMOREMONEY"
+key = [9,0,1,7,23,15,21,14,11,11,2,8,9]
+
+c = ""
+
+for ch,k in zip(p,key):
+    c += chr((ord(ch)-65+k)%26 + 65)
+
+print("Ciphertext:", c)
