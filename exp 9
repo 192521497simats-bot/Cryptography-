@@ -1,0 +1,47 @@
+matrix = [
+    "ABCDEFG",
+    "HIKLMNO",
+    "PQRSTUV",
+    "WXYZBCD",
+    "EFGHIKL"
+]
+
+# Use a standard 5x5 matrix generated from a key
+key = "MONARCHY"
+abc = "ABCDEFGHIKLMNOPQRSTUVWXYZ"
+
+s = ""
+for x in key + abc:
+    x = x.upper().replace("J", "I")
+    if x not in s and x in abc:
+        s += x
+
+m = [s[i:i+5] for i in range(0, 25, 5)]
+print("Matrix:")
+for r in m:
+    print(r)
+
+cipher = """KXJEYUREBEZWEHEWRYTUHEYFS
+KREHEGOYFIWTTTUOLKSYCAJPO
+BOTEIZONTXBYBNTGONEYCUZWR
+GDSONSXBOUYWRHEBAAHYUSEDQ"""
+
+def pos(c):
+    for i in range(5):
+        if c in m[i]:
+            return i, m[i].index(c)
+
+plain = ""
+for i in range(0, len(cipher), 2):
+    a, b = cipher[i], cipher[i+1]
+    r1,c1 = pos(a)
+    r2,c2 = pos(b)
+
+    if r1 == r2:
+        plain += m[r1][(c1-1)%5] + m[r2][(c2-1)%5]
+    elif c1 == c2:
+        plain += m[(r1-1)%5][c1] + m[(r2-1)%5][c2]
+    else:
+        plain += m[r1][c2] + m[r2][c1]
+
+print("Decrypted:", plain)
