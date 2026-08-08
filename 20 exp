@@ -1,0 +1,11 @@
+print("ECB:")
+print("Error in C1 affects only P1.")
+
+print("\nCBC:")
+print("Error in C1 affects P1 and P2.")
+print("Blocks after P2 are not affected.")
+
+print("\nIf P1 has a bit error:")
+print("The error propagates through the CBC chaining.")
+print("The corresponding ciphertext block is affected,")
+print("and subsequent blocks can recover after the chaining effect.")
