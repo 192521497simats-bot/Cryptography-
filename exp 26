@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+int main(){
+    int p=61,q=53;
+    int n=p*q;
+    int phi=(p-1)*(q-1);
+
+    int old_e=17;
+    int old_d=0;
+
+    for(int d=1;d<phi;d++)
+        if((old_e*d)%phi==1)
+            old_d=d;
+
+    int new_e=7,new_d=0;
+
+    for(int d=1;d<phi;d++)
+        if((new_e*d)%phi==1)
+            new_d=d;
+
+    printf("Old public key:  (%d,%d)\n",old_e,n);
+    printf("Old private key: %d\n",old_d);
+
+    printf("New public key:  (%d,%d)\n",new_e,n);
+    printf("New private key: %d\n",new_d);
+
+    printf("\nReusing the same modulus is NOT safe.\n");
+
+    return 0;
+}
