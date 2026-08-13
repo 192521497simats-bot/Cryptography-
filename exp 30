@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int E(int x){
+    return (5*x+7)%256;
+}
+
+int main(){
+    int X=20;
+
+    int T=E(X);
+
+    int second=X^T;
+
+    int C1=E(X);
+    int C2=E(second^C1);
+
+    printf("X = %d\n",X);
+    printf("MAC(X) = %d\n",T);
+
+    printf("MAC(X || (X XOR T)) = %d\n",C2);
+
+    if(T==C2)
+        printf("Attack successful: MACs are equal.\n");
+
+    return 0;
+}
