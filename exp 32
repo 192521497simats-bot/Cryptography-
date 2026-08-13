@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int inverse(int a,int q){
+    for(int i=1;i<q;i++)
+        if((a*i)%q==1)
+            return i;
+    return -1;
+}
+
+int main(){
+    int p=23,q=11,g=2;
+    int privateKey=3;
+    int hash=9;
+
+    srand(time(NULL));
+
+    for(int i=0;i<2;i++){
+        int k=1+rand()%10;
+
+        int r=1;
+        for(int j=0;j<k;j++)
+            r=r*g%p;
+        r%=q;
+
+        int s=inverse(k,q)*(hash+privateKey*r)%q;
+
+        printf("Signature %d: r=%d s=%d k=%d\n",
+               i+1,r,s,k);
+    }
+
+    printf("\nDifferent random k values produce different signatures.\n");
+
+    return 0;
+}
