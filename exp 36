@@ -1,0 +1,36 @@
+#include <stdio.h>
+
+int inverse(int a){
+    for(int i=0;i<26;i++)
+        if((a*i)%26==1)
+            return i;
+    return -1;
+}
+
+int main(){
+    char text[100];
+    int a,b;
+
+    printf("Enter plaintext: ");
+    scanf("%s",text);
+
+    printf("Enter a and b: ");
+    scanf("%d%d",&a,&b);
+
+    if(inverse(a)==-1){
+        printf("Invalid a. It must have an inverse modulo 26.\n");
+        return 0;
+    }
+
+    printf("Ciphertext: ");
+
+    for(int i=0;text[i];i++){
+        int p=text[i]-'A';
+        int c=(a*p+b)%26;
+        printf("%c",c+'A');
+    }
+
+    printf("\n");
+
+    return 0;
+}
