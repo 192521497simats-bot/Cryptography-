@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+#include <openssl/des.h>
+
+int main(){
+    DES_cblock key={"12345678"};
+    DES_key_schedule ks;
+
+    DES_set_key_unchecked(&key,&ks);
+
+    DES_cblock plaintext={"ABCDEFGH"};
+    DES_cblock cipher, decrypted;
+
+    DES_ecb_encrypt(&plaintext,&cipher,&ks,DES_ENCRYPT);
+    DES_ecb_encrypt(&cipher,&decrypted,&ks,DES_DECRYPT);
+
+    printf("Plaintext : %.8s\n",plaintext);
+
+    printf("Ciphertext: ");
+    for(int i=0;i<8;i++)
+        printf("%02X",cipher[i]);
+
+    printf("\nDecrypted : %.8s\n",decrypted);
+
+    return 0;
+}
