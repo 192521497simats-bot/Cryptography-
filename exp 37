@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <string.h>
+
+int main(){
+    char cipher[500];
+    char freq[]="ETAOINSHRDLCUMWFGYPBVKJXQZ";
+    int count[26]={0};
+
+    printf("Enter ciphertext:\n");
+    fgets(cipher,500,stdin);
+
+    for(int i=0;cipher[i];i++)
+        if(cipher[i]>='A' && cipher[i]<='Z')
+            count[cipher[i]-'A']++;
+
+    printf("\nFrequency order:\n");
+
+    for(int k=0;k<26;k++){
+        int max=-1,pos=-1;
+
+        for(int i=0;i<26;i++)
+            if(count[i]>max){
+                max=count[i];
+                pos=i;
+            }
+
+        if(pos==-1) break;
+
+        printf("%c -> %c\n",pos+'A',freq[k]);
+        count[pos]=-1;
+    }
+
+    printf("\nThis gives a rough frequency-based plaintext mapping.\n");
+
+    return 0;
+}
