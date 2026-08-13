@@ -1,0 +1,22 @@
+#include <stdio.h>
+#include <stdint.h>
+
+uint64_t leftshift64(uint64_t x){
+    return x<<1;
+}
+
+uint64_t leftshift128(uint64_t high,uint64_t low){
+    high=(high<<1)|(low>>63);
+    low<<=1;
+    return high;
+}
+
+int main(){
+    printf("CMAC constant for 64-bit block  = 0x1B\n");
+    printf("CMAC constant for 128-bit block = 0x87\n");
+
+    printf("\nLeft shift moves every bit one position.\n");
+    printf("If the original MSB is 1, XOR with the reduction constant.\n");
+
+    return 0;
+}
