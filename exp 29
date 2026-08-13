@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main(){
+    int rate=1024;
+    int capacity=576;
+    int lanes=capacity/64;
+
+    printf("Rate = %d bits\n",rate);
+    printf("Capacity = %d bits\n",capacity);
+    printf("Capacity lanes = %d\n",lanes);
+
+    printf("\nWithout permutation, message blocks affect only rate lanes.\n");
+    printf("Capacity lanes remain zero forever.\n");
+    printf("Therefore all capacity lanes become nonzero: NEVER.\n");
+
+    return 0;
+}
