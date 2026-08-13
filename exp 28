@@ -1,0 +1,34 @@
+#include <stdio.h>
+
+long long power(long long a,long long b,long long q){
+    long long r=1;
+
+    while(b){
+        if(b%2) r=r*a%q;
+        a=a*a%q;
+        b/=2;
+    }
+
+    return r;
+}
+
+int main(){
+    int q=23,a=5;
+    int x=6,y=15;
+
+    int A=power(a,x,q);
+    int B=power(a,y,q);
+
+    int key1=power(B,x,q);
+    int key2=power(A,y,q);
+
+    printf("Alice sends: %d\n",A);
+    printf("Bob sends: %d\n",B);
+    printf("Alice key: %d\n",key1);
+    printf("Bob key: %d\n",key2);
+
+    printf("\nBoth obtain the same key.\n");
+    printf("Sending x*a instead would expose x when inverse(a) exists.\n");
+
+    return 0;
+}
