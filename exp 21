@@ -1,0 +1,65 @@
+#include <stdio.h>
+
+#define KEY 0xAA
+#define IV  0x55
+
+void ecb(unsigned char *p, unsigned char *c, int n) {
+    for (int i = 0; i < n; i++)
+        c[i] = p[i] ^ KEY;
+}
+
+void cbc(unsigned char *p, unsigned char *c, int n) {
+    unsigned char prev = IV;
+
+    for (int i = 0; i < n; i++) {
+        c[i] = (p[i] ^ prev) ^ KEY;
+        prev = c[i];
+    }
+}
+
+void cfb_encrypt(unsigned char *p, unsigned char *c, int n) {
+    unsigned char prev = IV;
+
+    for (int i = 0; i < n; i++) {
+        c[i] = p[i] ^ (prev ^ KEY);
+        prev = c[i];
+    }
+}
+
+void cfb_decrypt(unsigned char *c, unsigned char *p, int n) {
+    unsigned char prev = IV;
+
+    for (int i = 0; i < n; i++) {
+        p[i] = c[i] ^ (prev ^ KEY);
+        prev = c[i];
+    }
+}
+
+void print(unsigned char *x, int n) {
+    for (int i = 0; i < n; i++)
+        printf("%02X ", x[i]);
+    printf("\n");
+}
+
+int main() {
+    unsigned char p[] = "HELLO";
+    unsigned char e[5], c[5], f[5], d[5];
+
+    ecb(p, e, 5);
+    cbc(p, c, 5);
+    cfb_encrypt(p, f, 5);
+    cfb_decrypt(f, d, 5);
+
+    printf("ECB: ");
+    print(e, 5);
+
+    printf("CBC: ");
+    print(c, 5);
+
+    printf("CFB: ");
+    print(f, 5);
+
+    printf("CFB Decryption: %s\n", d);
+
+    return 0;
+}
