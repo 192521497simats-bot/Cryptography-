@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int gcd(int a,int b){
+    while(b){
+        int t=a%b;
+        a=b;
+        b=t;
+    }
+    return a;
+}
+
+int main(){
+    int n=55;
+    int blocks[]={12,18,7,35,9};
+
+    for(int i=0;i<5;i++){
+        int g=gcd(blocks[i],n);
+
+        if(g>1 && g<n)
+            printf("Block %d reveals factor = %d\n",blocks[i],g);
+        else
+            printf("Block %d reveals nothing\n",blocks[i]);
+    }
+
+    return 0;
+}
